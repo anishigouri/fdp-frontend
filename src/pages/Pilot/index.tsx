@@ -1,7 +1,8 @@
 import React from 'react';
+import { TitleStyled } from './styled';
 
 const Pilot: React.FC = () => {
-  return <h1>Página de pilotos</h1>;
+  return <TitleStyled>Página de pilotos</TitleStyled>;
 };
 
 export default Pilot;
