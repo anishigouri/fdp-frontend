@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ContainerStyled, FormStyled } from './styled';
 import InputText from '../../components/inputText';
 import { changeValue } from '../../utils/util';
 import { IValues, initialValues } from './model';
+import Button from '../../components/button';
 
 const Login: React.FC = () => {
   const [data, setData] = useState<IValues>(initialValues);
@@ -12,17 +13,30 @@ const Login: React.FC = () => {
     setData(newObj);
   }
 
-  useEffect(() => {
+  function onLogin(): void {
     console.log(data);
-  }, [data]);
+  }
+
+  function forgotMyPassword(): void {
+    console.log('esqueci minha senha');
+  }
 
   return (
     <ContainerStyled>
       <FormStyled>
         <img src="/assets/img/logo-fdp.jpg" alt="logo" />
         <form>
-          <InputText name="username" label="Usuário" onChange={onChange} />
-          <InputText name="password" label="Senha" onChange={onChange} />
+          <InputText
+            state={data.username}
+            label="Usuário"
+            onChange={onChange}
+          />
+          <InputText state={data.password} label="Senha" onChange={onChange} />
+          <Button type="primary" text="Entrar" onClick={onLogin} />
+          <Button type="default" text="Ir para o site" onClick={onLogin} />
+          <a href="forgotMyPassword" onClick={forgotMyPassword}>
+            Esqueci minha senha
+          </a>
         </form>
       </FormStyled>
     </ContainerStyled>

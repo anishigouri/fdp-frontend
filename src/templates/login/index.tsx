@@ -33,7 +33,7 @@ const LoginRoute: React.FC<any> = ({ component: Component, ...rest }) => (
 );
 
 LoginRoute.propTypes = {
-  component: PropTypes.node.isRequired,
+  component: PropTypes.func.isRequired,
 };
 
 export default LoginRoute;

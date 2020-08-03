@@ -1,21 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ContainerStyled } from './styled';
+import { dataModel } from '../../utils/modelUtil';
 
 interface IProps {
-  name: string;
+  state: dataModel;
   label?: string;
   onChange(name: string, value: string): void;
 }
 
-const InputText: React.FC<IProps> = ({ name, label, onChange }) => {
+const InputText: React.FC<IProps> = ({ state, label, onChange }) => {
   return (
     <ContainerStyled>
-      <label htmlFor={name}>
+      <label htmlFor={state.name}>
         <input
-          id={name}
+          id={state.name}
           placeholder=" "
-          onChange={e => onChange(name, e.target.value)}
+          maxLength={state.maxLength}
+          value={state.value}
+          onChange={e => onChange(state.name, e.target.value)}
         />
         <span className="label">{label}</span>
         <span className="focus-bg" />
@@ -26,7 +29,17 @@ const InputText: React.FC<IProps> = ({ name, label, onChange }) => {
 
 InputText.propTypes = {
   label: PropTypes.string,
-  name: PropTypes.string.isRequired,
+  state: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    required: PropTypes.bool.isRequired,
+    type: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    maxLength: PropTypes.number.isRequired,
+    error: PropTypes.shape({
+      hasError: PropTypes.bool.isRequired,
+      message: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
   onChange: PropTypes.func.isRequired,
 };
 

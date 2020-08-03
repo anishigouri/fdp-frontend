@@ -9,5 +9,6 @@ export default {
     danger: '#f44336 ',
     warning: '#ffff00 ',
     success: '#00e676 ',
+    default: '#ccc',
   },
 };
