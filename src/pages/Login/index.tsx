@@ -2,16 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ContainerStyled, FormStyled } from './styled';
 import InputText from '../../components/inputText';
 import { changeValue } from '../../utils/util';
-
-interface IValues {
-  username: string;
-  password: string;
-}
-
-const initialValues: IValues = {
-  username: '',
-  password: '',
-};
+import { IValues, initialValues } from './model';
 
 const Login: React.FC = () => {
   const [data, setData] = useState<IValues>(initialValues);
