@@ -11,5 +11,6 @@ export const initialValues: IValues = {
 };
 
 export const validationSchema = Yup.object().shape({
-  username: Yup.string().required('Usuário obrigatório'),
+  username: Yup.string().required('Obrigatório'),
+  password: Yup.string().required('Obrigatório'),
 });

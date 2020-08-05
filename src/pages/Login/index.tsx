@@ -1,51 +1,54 @@
-import { Button } from '@material-ui/core';
-import { Form, Formik, FormikProps } from 'formik';
+import { useFormik } from 'formik';
 import React from 'react';
+import Button from '../../components/button';
+import ButtonSubmit from '../../components/buttonSubmit';
 import InputText from '../../components/inputText';
-import { initialValues, IValues, validationSchema } from './model';
+import { initialValues, validationSchema } from './model';
+import { ContainerStyled, FormStyled } from './styled';
 
-const SignUp: React.FunctionComponent = () => {
-  const onLogin = (data: IValues, resetForm: Function): void => {
-    console.log(data);
-    resetForm({});
-  };
+const LoginForm: React.FunctionComponent = () => {
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: values => {
+      console.log('Implementarion login', values);
+    },
+  });
+
+  function onRedirect(): void {
+    console.log('Redirecionando');
+  }
 
   return (
-    <div>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values: IValues, actions) => {
-          onLogin(values, actions.resetForm);
-          setTimeout(() => {
-            actions.setSubmitting(false);
-          }, 500);
-        }}
-        validationSchema={validationSchema}
-      >
-        {(props: FormikProps<IValues>) => {
-          return (
-            <Form>
-              <h1>Sign up</h1>
+    <ContainerStyled>
+      <FormStyled>
+        <img src="/assets/img/logo-fdp.jpg" alt="logo" />
+        <form onSubmit={formik.handleSubmit}>
+          <InputText
+            label="Usuário"
+            onChange={formik.handleChange}
+            textError={formik.errors.username}
+            hasError={!!formik.errors.username}
+            name="username"
+            value={formik.values.username}
+          />
 
-              <InputText
-                label="Usuário"
-                onChange={props.handleChange}
-                type="text"
-                textError={props.errors.username}
-                hasError={!!props.errors.username}
-                name="username"
-                value={props.values.username}
-              />
+          <InputText
+            label="Senha"
+            onChange={formik.handleChange}
+            type="password"
+            textError={formik.errors.password}
+            hasError={!!formik.errors.password}
+            name="password"
+            value={formik.values.password}
+          />
 
-              <Button type="submit" variant="contained" color="secondary">
-                Submit
-              </Button>
-            </Form>
-          );
-        }}
-      </Formik>
-    </div>
+          <ButtonSubmit type="primary" text="Entrar" />
+          <Button type="default" text="Ir para o site" onClick={onRedirect} />
+        </form>
+      </FormStyled>
+    </ContainerStyled>
   );
 };
 
-export default SignUp;
+export default LoginForm;

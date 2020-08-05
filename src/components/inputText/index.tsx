@@ -6,7 +6,7 @@ interface IProps {
   name: string;
   label?: string;
   value: string;
-  type: string;
+  type?: string;
   textError: string | undefined;
   hasError: boolean;
   maxLength?: number;
@@ -41,7 +41,7 @@ const InputText: React.FC<IProps> = ({
 InputText.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   value: PropTypes.string.isRequired,
   maxLength: PropTypes.number,
   textError: PropTypes.string,
@@ -53,6 +53,7 @@ InputText.defaultProps = {
   label: '',
   maxLength: 50,
   textError: '',
+  type: 'text',
 };
 
 export default InputText;
