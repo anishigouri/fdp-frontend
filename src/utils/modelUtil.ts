@@ -22,8 +22,8 @@ export function initialValueAttr(name: string): dataModel {
     value: '',
     maxLength: 50,
     error: {
-      hasError: false,
-      message: '',
+      hasError: true,
+      message: 'Obrigatório',
     },
   };
 }

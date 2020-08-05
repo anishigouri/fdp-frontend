@@ -11,7 +11,7 @@ interface IProps {
 
 const InputText: React.FC<IProps> = ({ state, label, onChange }) => {
   return (
-    <ContainerStyled>
+    <ContainerStyled hasError={state.error.hasError}>
       <label htmlFor={state.name}>
         <input
           id={state.name}

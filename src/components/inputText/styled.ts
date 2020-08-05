@@ -1,13 +1,12 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-export const ContainerStyled = styled.div`
+export const ContainerStyled = styled('div')<{ hasError: boolean }>`
   display: grid;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
 
   label {
-    color: ${props => props.theme.colors.text};
     position: relative;
     margin: auto;
     width: 100%;
@@ -21,7 +20,8 @@ export const ContainerStyled = styled.div`
         top: 20px;
         left: 12px;
         font-size: 16px;
-        color: ${rgba('#424242', 0.5)};
+        color: ${props =>
+          props.hasError ? props.theme.colors.danger : rgba('#424242', 0.5)};
         font-weight: 500;
         transform-origin: 0 0;
         transform: translate3d(0, 0, 0);
@@ -52,7 +52,7 @@ export const ContainerStyled = styled.div`
       font-size: 16px;
       font-weight: 400;
       background-color: 'rgba(red, 0.02)';
-      box-shadow: inset 0 -1px 0 ${rgba('#424242', 0.3)};
+      box-shadow: inset 0 -1px 0 ${props => (props.hasError ? props.theme.colors.danger : rgba('#424242', 0.3))};
       color: ${props => props.theme.colors.text};
       transition: all 0.15s ease;
 
