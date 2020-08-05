@@ -1,50 +1,58 @@
-import React from 'react';
+import { TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { ContainerStyled } from './styled';
-import { dataModel } from '../../utils/modelUtil';
+import React, { FormEvent } from 'react';
 
 interface IProps {
-  state: dataModel;
+  name: string;
   label?: string;
-  onChange(name: string, value: string): void;
+  value: string;
+  type: string;
+  textError: string | undefined;
+  hasError: boolean;
+  maxLength?: number;
+  onChange(e: FormEvent<HTMLTextAreaElement | HTMLInputElement>): void;
 }
 
-const InputText: React.FC<IProps> = ({ state, label, onChange }) => {
+const InputText: React.FC<IProps> = ({
+  label,
+  name,
+  value,
+  onChange,
+  textError,
+  hasError,
+  maxLength,
+  type,
+}) => {
   return (
-    <ContainerStyled hasError={state.error.hasError}>
-      <label htmlFor={state.name}>
-        <input
-          id={state.name}
-          placeholder=" "
-          maxLength={state.maxLength}
-          value={state.value}
-          onChange={e => onChange(state.name, e.target.value)}
-        />
-        <span className="label">{label}</span>
-        <span className="focus-bg" />
-      </label>
-    </ContainerStyled>
+    <TextField
+      name={name}
+      id={name}
+      label={label}
+      value={value}
+      type={type}
+      helperText={textError}
+      error={hasError}
+      onChange={e => onChange(e)}
+      rowsMax={maxLength}
+    />
   );
 };
 
 InputText.propTypes = {
   label: PropTypes.string,
-  state: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    required: PropTypes.bool.isRequired,
-    type: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    maxLength: PropTypes.number.isRequired,
-    error: PropTypes.shape({
-      hasError: PropTypes.bool.isRequired,
-      message: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  maxLength: PropTypes.number,
+  textError: PropTypes.string,
+  hasError: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
 };
 
 InputText.defaultProps = {
   label: '',
+  maxLength: 50,
+  textError: '',
 };
 
 export default InputText;

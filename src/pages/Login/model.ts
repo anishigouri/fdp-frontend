@@ -1,11 +1,15 @@
-import { initialValueAttr, dataModel } from '../../utils/modelUtil';
+import * as Yup from 'yup';
 
 export interface IValues {
-  username: dataModel;
-  password: dataModel;
+  username: string;
+  password: string;
 }
 
 export const initialValues: IValues = {
-  username: initialValueAttr('username'),
-  password: initialValueAttr('password'),
+  username: '',
+  password: '',
 };
+
+export const validationSchema = Yup.object().shape({
+  username: Yup.string().required('Usuário obrigatório'),
+});

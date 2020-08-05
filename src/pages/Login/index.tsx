@@ -1,46 +1,51 @@
-import React, { useState } from 'react';
-import { ContainerStyled, FormStyled } from './styled';
+import { Button } from '@material-ui/core';
+import { Form, Formik, FormikProps } from 'formik';
+import React from 'react';
 import InputText from '../../components/inputText';
-import { changeValue } from '../../utils/util';
-import { IValues, initialValues } from './model';
-import Button from '../../components/button';
+import { initialValues, IValues, validationSchema } from './model';
 
-const Login: React.FC = () => {
-  const [data, setData] = useState<IValues>(initialValues);
-
-  function onChange(name: string, value: string): void {
-    const newObj = changeValue<IValues>(data, name, value);
-    setData(newObj);
-  }
-
-  function onLogin(): void {
+const SignUp: React.FunctionComponent = () => {
+  const onLogin = (data: IValues, resetForm: Function): void => {
     console.log(data);
-  }
-
-  function forgotMyPassword(): void {
-    console.log('esqueci minha senha');
-  }
+    resetForm({});
+  };
 
   return (
-    <ContainerStyled>
-      <FormStyled>
-        <img src="/assets/img/logo-fdp.jpg" alt="logo" />
-        <form>
-          <InputText
-            state={data.username}
-            label="Usuário"
-            onChange={onChange}
-          />
-          <InputText state={data.password} label="Senha" onChange={onChange} />
-          <Button type="primary" text="Entrar" onClick={onLogin} />
-          <Button type="default" text="Ir para o site" onClick={onLogin} />
-          <a href="forgotMyPassword" onClick={forgotMyPassword}>
-            Esqueci minha senha
-          </a>
-        </form>
-      </FormStyled>
-    </ContainerStyled>
+    <div>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values: IValues, actions) => {
+          onLogin(values, actions.resetForm);
+          setTimeout(() => {
+            actions.setSubmitting(false);
+          }, 500);
+        }}
+        validationSchema={validationSchema}
+      >
+        {(props: FormikProps<IValues>) => {
+          return (
+            <Form>
+              <h1>Sign up</h1>
+
+              <InputText
+                label="Usuário"
+                onChange={props.handleChange}
+                type="text"
+                textError={props.errors.username}
+                hasError={!!props.errors.username}
+                name="username"
+                value={props.values.username}
+              />
+
+              <Button type="submit" variant="contained" color="secondary">
+                Submit
+              </Button>
+            </Form>
+          );
+        }}
+      </Formik>
+    </div>
   );
 };
 
-export default Login;
+export default SignUp;
