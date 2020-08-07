@@ -10,11 +10,20 @@ import {
   ListItemText,
   ListItemIcon,
 } from '@material-ui/core';
-import { MdMenu, MdChevronLeft, MdInbox, MdMail } from 'react-icons/md';
+import { MdMenu, MdChevronLeft } from 'react-icons/md';
+import { GiFullMotorcycleHelmet } from 'react-icons/gi';
+import { Link } from 'react-router-dom';
 import { AsideStyled } from './styled';
 
 const Header: React.FC = () => {
   const [open, setOpen] = useState(false);
+  const listMenu = [
+    {
+      text: 'Pilotos',
+      icon: <GiFullMotorcycleHelmet />,
+      route: '/admin/pilots',
+    },
+  ];
 
   function handleDrawerOpen(): void {
     setOpen(true);
@@ -25,7 +34,7 @@ const Header: React.FC = () => {
   }
   return (
     <AsideStyled>
-      <AppBar position="fixed">
+      <AppBar position="fixed" color="inherit">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -35,7 +44,7 @@ const Header: React.FC = () => {
           >
             <MdMenu />
           </IconButton>
-          teste
+          Olá, Admin
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>
@@ -46,13 +55,13 @@ const Header: React.FC = () => {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <MdInbox /> : <MdMail />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+          {listMenu.map(item => (
+            <Link to={item.route} key={item.text}>
+              <ListItem button>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </Drawer>

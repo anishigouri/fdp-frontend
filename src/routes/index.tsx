@@ -11,7 +11,8 @@ import Home from '../pages/admin/Home';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Route exact path="/" component={Pilot} />
+    <AdminRoute exact path="/" component={Home} />
+    <AdminRoute path="/admin/pilots" component={Pilot} />
     <LoginRoute path="/login" component={Login} />
     <AdminRoute path="/admin" component={Home} />
   </Switch>
