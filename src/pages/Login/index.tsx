@@ -1,17 +1,21 @@
 import { useFormik } from 'formik';
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Button from '../../components/button';
 import ButtonSubmit from '../../components/buttonSubmit';
 import InputText from '../../components/inputText';
 import { initialValues, validationSchema } from './model';
 import { ContainerStyled, FormStyled } from './styled';
+import { accessLogin } from '../../redux/ducks/login';
 
 const LoginForm: React.FunctionComponent = () => {
+  const user = useSelector(state => {});
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: values => {
-      console.log('Implementarion login', values);
+      accessLogin(values);
     },
   });
 
@@ -27,10 +31,10 @@ const LoginForm: React.FunctionComponent = () => {
           <InputText
             label="Usuário"
             onChange={formik.handleChange}
-            textError={formik.errors.username}
-            hasError={!!formik.errors.username}
-            name="username"
-            value={formik.values.username}
+            textError={formik.errors.email}
+            hasError={!!formik.errors.email}
+            name="email"
+            value={formik.values.email}
           />
 
           <InputText
