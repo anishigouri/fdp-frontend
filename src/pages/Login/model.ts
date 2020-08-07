@@ -1,11 +1,11 @@
 import * as Yup from 'yup';
 
-export interface IValues {
+export interface ILoginValues {
   username: string;
   password: string;
 }
 
-export const initialValues: IValues = {
+export const initialValues: ILoginValues = {
   username: '',
   password: '',
 };
