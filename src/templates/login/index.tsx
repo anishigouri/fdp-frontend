@@ -4,11 +4,13 @@ import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 import GlobalStyle from '../../styles/global';
 import light from '../../styles/themes/light';
+import Notification from '../../components/notification';
 
 const Body: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={light}>
       <GlobalStyle />
+      <Notification />
       {children}
     </ThemeProvider>
   );

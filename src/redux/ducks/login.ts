@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 import { ILoginValues } from '../../pages/Login/model';
 import api from '../../services/api';
+import { showToast } from '../../components/notification';
 
 interface ILogin {
   bearer: string;
@@ -15,10 +16,8 @@ export const loginReducer = (
   state: ILogin = { bearer: '' },
   action: AccessLoginAction,
 ): ILogin => {
-  console.log('actionnnnn', action);
   switch (action.type) {
     case 'ACCESS_LOGIN': {
-      console.log('stateeee', action.bearer);
       return { ...state, bearer: action.bearer };
     }
     default:
@@ -32,13 +31,15 @@ export const accessLogin = (data: ILoginValues) => (
   api
     .post('/sessions', data)
     .then(res => {
-      console.log('response', res);
+      showToast('success', 'Seja bem vindo!');
+      localStorage.setItem('token', res.data.token);
       dispatch({
         type: 'ACCESS_LOGIN',
-        bearer: 'iefieufhweiufhwefhiweu',
+        bearer: res.data.token,
       });
     })
     .catch(err => {
-      console.log('erro', err);
+      console.error('erro', err);
+      showToast('error', 'Usuário ou senha inválidos');
     });
 };

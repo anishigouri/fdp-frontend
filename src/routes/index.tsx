@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 
 import Login from '../pages/Login';
 import Pilot from '../pages/admin/Pilot';
