@@ -9,13 +9,16 @@ import { ContainerStyled, FormStyled } from './styled';
 import { accessLogin } from '../../redux/ducks/login';
 
 const LoginForm: React.FunctionComponent = () => {
-  const user = useSelector(state => {});
+  const user = useSelector(state => {
+    console.log('aaaaa', state);
+  });
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: values => {
-      accessLogin(values);
+      console.log('oioioii');
+      dispatch(accessLogin(values));
     },
   });
 
