@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import history from '../../history';
 import { ILoginValues } from '../../pages/Login/model';
 import api from '../../services/api';
 import { showToast } from '../../components/notification';
@@ -37,6 +38,7 @@ export const accessLogin = (data: ILoginValues) => (
         type: 'ACCESS_LOGIN',
         bearer: res.data.token,
       });
+      history.push('/pilots');
     })
     .catch(err => {
       console.error('erro', err);
