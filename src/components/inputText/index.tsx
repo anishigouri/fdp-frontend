@@ -5,7 +5,7 @@ import React, { FormEvent } from 'react';
 interface IProps {
   name: string;
   label?: string;
-  value: string;
+  value?: string;
   type?: string;
   textError: string | undefined;
   hasError: boolean;
@@ -25,6 +25,7 @@ const InputText: React.FC<IProps> = ({
 }) => {
   return (
     <TextField
+      fullWidth
       name={name}
       id={name}
       label={label}
@@ -42,7 +43,7 @@ InputText.propTypes = {
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   maxLength: PropTypes.number,
   textError: PropTypes.string,
   hasError: PropTypes.bool.isRequired,
@@ -54,6 +55,7 @@ InputText.defaultProps = {
   maxLength: 50,
   textError: '',
   type: 'text',
+  value: '',
 };
 
 export default InputText;

@@ -5,13 +5,16 @@ import PropTypes from 'prop-types';
 import GlobalStyle from '../../styles/global';
 import light from '../../styles/themes/light';
 import Header from '../../components/header';
+import { ContainerStyled } from './styled';
 
 const Body: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={light}>
-      <Header />
-      <GlobalStyle />
-      {children}
+      <ContainerStyled>
+        <Header />
+        <GlobalStyle />
+        {children}
+      </ContainerStyled>
     </ThemeProvider>
   );
 };

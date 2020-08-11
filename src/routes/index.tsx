@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import Home from '../pages/admin/Home';
-import Pilot from '../pages/admin/Pilot';
+import Pilot from '../pages/admin/Pilot/Form';
 import Login from '../pages/Login';
 import AdminRoute from '../templates/adm';
 import LoginRoute from '../templates/login';
