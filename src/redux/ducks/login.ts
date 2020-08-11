@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
-import history from '../../history';
+import { History } from 'history';
+import { showToast } from '../../components/notification';
 import { ILoginValues } from '../../pages/Login/model';
 import api from '../../services/api';
-import { showToast } from '../../components/notification';
 
 interface ILogin {
   bearer: string;
@@ -26,7 +26,7 @@ export const loginReducer = (
   }
 };
 
-export const accessLogin = (data: ILoginValues) => (
+export const accessLogin = (data: ILoginValues, history: History) => (
   dispatch: Dispatch<AccessLoginAction>,
 ): void => {
   api
@@ -38,7 +38,7 @@ export const accessLogin = (data: ILoginValues) => (
         type: 'ACCESS_LOGIN',
         bearer: res.data.token,
       });
-      history.push('/pilots');
+      history.push('/admin/pilots');
     })
     .catch(err => {
       console.error('erro', err);

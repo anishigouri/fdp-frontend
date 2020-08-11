@@ -1,23 +1,17 @@
 import React from 'react';
-
-import { Switch, Router } from 'react-router-dom';
-
-import Login from '../pages/Login';
-import Pilot from '../pages/admin/Pilot';
-
-import LoginRoute from '../templates/login';
-import AdminRoute from '../templates/adm';
+import { Switch } from 'react-router-dom';
 import Home from '../pages/admin/Home';
-import history from '../history';
+import Pilot from '../pages/admin/Pilot';
+import Login from '../pages/Login';
+import AdminRoute from '../templates/adm';
+import LoginRoute from '../templates/login';
 
 const Routes: React.FC = () => (
   <Switch>
-    <Router history={history}>
-      <AdminRoute exact path="/" component={Home} />
-      <AdminRoute path="/admin/pilots" component={Pilot} />
-      <LoginRoute path="/login" component={Login} />
-      <AdminRoute path="/admin" component={Home} />
-    </Router>
+    <AdminRoute exact path="/" component={Home} />
+    <AdminRoute exact path="/admin" component={Home} />
+    <AdminRoute path="/admin/pilots" component={Pilot} />
+    <LoginRoute path="/login" component={Login} />
   </Switch>
 );
 

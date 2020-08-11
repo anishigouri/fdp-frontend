@@ -1,20 +1,22 @@
 import { useFormik } from 'formik';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import Button from '../../components/button';
 import ButtonSubmit from '../../components/buttonSubmit';
 import InputText from '../../components/inputText';
+import { accessLogin } from '../../redux/ducks/login';
 import { initialValues, validationSchema } from './model';
 import { ContainerStyled, FormStyled } from './styled';
-import { accessLogin } from '../../redux/ducks/login';
 
 const LoginForm: React.FunctionComponent = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: values => {
-      dispatch(accessLogin(values));
+      dispatch(accessLogin(values, history));
     },
   });
 
