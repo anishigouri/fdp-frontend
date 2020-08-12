@@ -54,6 +54,7 @@ const Pilot: React.FC = () => {
               textError={formik.errors.celphone}
               hasError={!!formik.errors.celphone}
               name="celphone"
+              mask="(99)99999-9999"
               value={formik.values.celphone}
             />
           </div>

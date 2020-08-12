@@ -1,6 +1,7 @@
 import { TextField } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import React, { FormEvent } from 'react';
+import { maskJs } from 'mask-js';
 
 interface IProps {
   name: string;
@@ -10,6 +11,7 @@ interface IProps {
   textError: string | undefined;
   hasError: boolean;
   maxLength?: number;
+  mask?: string;
   onChange(e: FormEvent<HTMLTextAreaElement | HTMLInputElement>): void;
 }
 
@@ -22,18 +24,28 @@ const InputText: React.FC<IProps> = ({
   hasError,
   maxLength,
   type,
+  mask,
 }) => {
+  function changeValue(
+    e: FormEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ): void {
+    if (mask) {
+      const target = e.target as HTMLTextAreaElement | HTMLInputElement;
+      target.value = maskJs(mask, target.value);
+    }
+    onChange(e);
+  }
   return (
     <TextField
       fullWidth
       name={name}
       id={name}
       label={label}
-      value={value}
       type={type}
       helperText={textError}
       error={hasError}
-      onChange={e => onChange(e)}
+      onChange={changeValue}
+      value={value}
       rowsMax={maxLength}
     />
   );
@@ -48,6 +60,7 @@ InputText.propTypes = {
   textError: PropTypes.string,
   hasError: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
+  mask: PropTypes.string,
 };
 
 InputText.defaultProps = {
@@ -56,6 +69,7 @@ InputText.defaultProps = {
   textError: '',
   type: 'text',
   value: '',
+  mask: '',
 };
 
 export default InputText;
