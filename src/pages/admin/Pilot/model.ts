@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export interface ILoginValues {
+export interface IPilot {
   name: string;
   nickname?: string;
   photo?: string;
@@ -11,7 +11,7 @@ export interface ILoginValues {
   birthdate: string;
 }
 
-export const initialValues: ILoginValues = {
+export const initialValues: IPilot = {
   name: '',
   nickname: '',
   photo: '',
@@ -26,5 +26,5 @@ export const validationSchema = Yup.object().shape({
   email: Yup.string().email().required('Obrigatório'),
   name: Yup.string().required('Obrigatório'),
   celphone: Yup.string().required('Obrigatório'),
-  birthdate: Yup.string().required('Obrigatório'),
+  birthdate: Yup.date().required('Obrigatório'),
 });

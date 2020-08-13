@@ -3,14 +3,17 @@ import { useFormik } from 'formik';
 import { ContainerStyled, ButtonContainerStyled } from './styled';
 import FormFields from '../../../../components/formFields';
 import InputText from '../../../../components/inputText';
-import { initialValues, validationSchema } from './model';
+import { initialValues, validationSchema } from '../model';
 import ButtonSubmit from '../../../../components/buttonSubmit';
 
 const Pilot: React.FC = () => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: values => {},
+    validateOnChange: false,
+    onSubmit: values => {
+      console.log(values);
+    },
   });
 
   return (
@@ -65,6 +68,7 @@ const Pilot: React.FC = () => {
               textError={formik.errors.birthdate}
               hasError={!!formik.errors.birthdate}
               name="birthdate"
+              mask="99/99/9999"
               value={formik.values.birthdate}
             />
           </div>
