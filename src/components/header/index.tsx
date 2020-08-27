@@ -11,6 +11,7 @@ import {
   ListItemIcon,
 } from '@material-ui/core';
 import { MdMenu, MdChevronLeft } from 'react-icons/md';
+import { FiLogOut } from 'react-icons/fi';
 import { GiFullMotorcycleHelmet } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { AsideStyled } from './styled';
@@ -64,6 +65,17 @@ const Header: React.FC = () => {
               </ListItem>
             </Link>
           ))}
+        </List>
+        <Divider />
+        <List className="mt-auto">
+          <Link to="/login" key="Logout">
+            <ListItem button>
+              <ListItemIcon>
+                <FiLogOut />
+              </ListItemIcon>
+              <ListItemText primary="Sair" />
+            </ListItem>
+          </Link>
         </List>
       </Drawer>
     </AsideStyled>
