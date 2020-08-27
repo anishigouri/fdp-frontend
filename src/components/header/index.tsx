@@ -45,6 +45,7 @@ const Header: React.FC = () => {
             <MdMenu />
           </IconButton>
           Olá, Admin
+          <img src="/assets/img/logo-horizontal.jpeg" alt="logo" />
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>

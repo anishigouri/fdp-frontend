@@ -6,12 +6,22 @@ export const AsideStyled = styled('aside')`
     .MuiToolbar-root {
       color: ${props => props.theme.colors.text};
     }
+    img {
+      position: relative;
+      margin-left: auto;
+      width: 150px;
+      max-width: 100%;
+    }
   }
   .MuiDrawer-root {
     .MuiList-root {
       a {
         color: #000;
         text-decoration: none;
+        .MuiListItem-button:hover {
+          background-color: ${props => props.theme.colors.primary};
+          color: ${props => props.theme.colors.text};
+        }
       }
     }
   }
