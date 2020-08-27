@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
 import GlobalStyle from '../../styles/global';
+import dark from '../../styles/themes/dark';
 import light from '../../styles/themes/light';
 import Header from '../../components/header';
 import { ContainerStyled } from './styled';

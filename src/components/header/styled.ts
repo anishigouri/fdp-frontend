@@ -14,15 +14,25 @@ export const AsideStyled = styled('aside')`
     }
   }
   .MuiDrawer-root {
+    .MuiIconButton-root {
+      color: ${props => props.theme.colors.text};
+    }
     .MuiPaper-root {
       display: flex;
       flex-direction: column;
+      background-color: ${props => props.theme.colors.backgroundForm};
       .MuiList-root {
         a {
-          color: #000;
+          color: ${props => props.theme.colors.text};
           text-decoration: none;
           .MuiListItem-button:hover {
             background-color: ${props => props.theme.colors.primary};
+            color: ${props => props.theme.colors.backgroundWithText};
+            .MuiListItemIcon-root {
+              color: ${props => props.theme.colors.backgroundWithText};
+            }
+          }
+          .MuiListItemIcon-root {
             color: ${props => props.theme.colors.text};
           }
         }
