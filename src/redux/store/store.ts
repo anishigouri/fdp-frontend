@@ -3,10 +3,12 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { loginReducer } from '../ducks/login';
 import { pilotReducer } from '../ducks/pilot';
+import { themeReducer } from '../ducks/theme';
 
 export const rootReducer = combineReducers({
   loginReducer,
   pilotReducer,
+  themeReducer,
 });
 
 const store = createStore(

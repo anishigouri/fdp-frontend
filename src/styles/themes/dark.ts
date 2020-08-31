@@ -7,9 +7,9 @@ export default {
     backgroundForm: '#616161',
     backgroundWithText: '#424242',
     text: '#fff',
-    danger: '#f44336 ',
-    warning: '#ffff00 ',
-    success: '#00e676 ',
+    danger: '#f44336',
+    warning: '#ffff00',
+    success: '#00e676',
     default: '#ccc',
   },
 };

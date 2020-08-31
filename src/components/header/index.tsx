@@ -13,10 +13,17 @@ import {
 import { MdMenu, MdChevronLeft } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { GiFullMotorcycleHelmet } from 'react-icons/gi';
+import { GoLightBulb } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { AsideStyled } from './styled';
+import Button from '../button';
+import { RootState } from '../../redux/store/store';
+import { setTheme } from '../../redux/ducks/theme';
 
 const Header: React.FC = () => {
+  const dispatch = useDispatch();
+
   const [open, setOpen] = useState(false);
   const listMenu = [
     {
@@ -25,13 +32,12 @@ const Header: React.FC = () => {
       route: '/admin/pilots',
     },
   ];
+  const theme = useSelector<RootState, string>(state => {
+    return state.themeReducer;
+  });
 
-  function handleDrawerOpen(): void {
-    setOpen(true);
-  }
-
-  function handleDrawerClose(): void {
-    setOpen(false);
+  function changeTheme(): void {
+    dispatch(setTheme(theme === 'light' ? 'dark' : 'light'));
   }
   return (
     <AsideStyled>
@@ -40,18 +46,23 @@ const Header: React.FC = () => {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={() => setOpen(!open)}
             edge="start"
           >
             <MdMenu />
           </IconButton>
           Olá, Admin
-          <img src="/assets/img/logo-horizontal.png" alt="logo" />
+          <span>
+            <Button type="link" onClick={changeTheme}>
+              <GoLightBulb />
+            </Button>
+            <img src="/assets/img/logo-horizontal.png" alt="logo" />
+          </span>
         </Toolbar>
       </AppBar>
       <Drawer variant="persistent" anchor="left" open={open}>
         <div>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={() => setOpen(!open)}>
             <MdChevronLeft />
           </IconButton>
         </div>

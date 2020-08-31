@@ -8,15 +8,22 @@ type types =
   | 'default'
   | 'danger'
   | 'warning'
+  | 'link'
   | 'success';
 interface IProps {
   type?: types;
-  text: string;
+  text?: string;
   className?: string;
   onClick(): void;
 }
 
-const Button: React.FC<IProps> = ({ type, text, onClick, className }) => {
+const Button: React.FC<IProps> = ({
+  type,
+  text,
+  onClick,
+  className,
+  children,
+}) => {
   function onClickButton(e: FormEvent): void {
     e.preventDefault();
     onClick();
@@ -28,12 +35,13 @@ const Button: React.FC<IProps> = ({ type, text, onClick, className }) => {
       onClick={e => onClickButton(e)}
     >
       {text}
+      {children}
     </ContainerStyled>
   );
 };
 
 Button.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string,
   type: PropTypes.oneOf([
@@ -43,10 +51,12 @@ Button.propTypes = {
     'danger',
     'warning',
     'success',
+    'link',
   ]),
 };
 
 Button.defaultProps = {
+  text: '',
   type: 'default',
   className: '',
 };

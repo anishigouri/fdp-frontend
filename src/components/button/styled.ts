@@ -7,6 +7,7 @@ export const ContainerStyled = styled.button`
   border-radius: 5px;
   margin-top: 10px;
   font-weight: 500;
+  outline: none !important;
 
   &.default {
     background-color: ${props => props.theme.colors.default};
@@ -59,6 +60,15 @@ export const ContainerStyled = styled.button`
 
     &:hover {
       background-color: ${props => tint(0.3, props.theme.colors.success)};
+    }
+  }
+  &.link {
+    background-color: transparent;
+    color: ${props => props.theme.colors.text};
+
+    &:hover {
+      background-color: ${props => tint(0.3, props.theme.colors.primary)};
+      color: ${props => props.theme.colors.backgroundWithText};
     }
   }
 `;
