@@ -1,10 +1,11 @@
 export default {
   title: 'dark',
   colors: {
-    primary: '#512da8',
-    secondary: '#6c4eb7',
+    primary: '#ffd600',
+    secondary: '#ffff00',
     background: '#424242',
     backgroundForm: '#616161',
+    backgroundWithText: '#424242',
     text: '#fff',
     danger: '#f44336 ',
     warning: '#ffff00 ',
