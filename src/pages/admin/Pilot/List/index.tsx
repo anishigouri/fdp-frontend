@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import FormFields from '../../../../components/formFields';
 import { fetchPilots } from '../../../../redux/ducks/pilot';
 import { RootState } from '../../../../redux/store/store';
@@ -11,7 +12,6 @@ const PilotList: React.FC = () => {
   const dispatch = useDispatch();
 
   const pilots = useSelector<RootState, IPilot[] | undefined>(state => {
-    console.log('stateeee', state);
     return state.pilotReducer.pilots;
   });
 
@@ -19,18 +19,15 @@ const PilotList: React.FC = () => {
     dispatch(fetchPilots());
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log(pilots);
-  }, [pilots]);
-
   return (
     <FormFields title="Lista de pilotos">
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
             <td>Nome</td>
             <td>E-mail</td>
             <td>Celular</td>
+            <td>Editar</td>
           </tr>
         </thead>
         <tbody>
@@ -40,6 +37,9 @@ const PilotList: React.FC = () => {
                 <td>{pilot.name}</td>
                 <td>{pilot.email}</td>
                 <td>{pilot.celphone}</td>
+                <td>
+                  <Link to={`/admin/pilots/${pilot.id}`}>Editar</Link>
+                </td>
               </tr>
             ))}
         </tbody>

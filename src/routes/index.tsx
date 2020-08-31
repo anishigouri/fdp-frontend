@@ -11,8 +11,8 @@ const Routes: React.FC = () => (
   <Switch>
     <AdminRoute exact path="/" component={Home} />
     <AdminRoute exact path="/admin" component={Home} />
-    <AdminRoute path="/admin/pilots" component={PilotList} />
     <AdminRoute path="/admin/pilots/:id" component={Pilot} />
+    <AdminRoute path="/admin/pilots" component={PilotList} />
     <LoginRoute path="/login" component={Login} />
   </Switch>
 );

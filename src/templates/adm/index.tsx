@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import GlobalStyle from '../../styles/global';
 import light from '../../styles/themes/light';
 import Header from '../../components/header';
+import Notification from '../../components/notification';
 import { ContainerStyled } from './styled';
 
 const Body: React.FC = ({ children }) => {
@@ -12,6 +13,7 @@ const Body: React.FC = ({ children }) => {
     <ThemeProvider theme={light}>
       <ContainerStyled>
         <Header />
+        <Notification />
         <GlobalStyle />
         {children}
       </ContainerStyled>

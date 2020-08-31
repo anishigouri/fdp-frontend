@@ -6,7 +6,7 @@ import { maskJs } from 'mask-js';
 interface IProps {
   name: string;
   label?: string;
-  value?: string;
+  value?: string | null;
   type?: string;
   textError: string | undefined;
   hasError: boolean;

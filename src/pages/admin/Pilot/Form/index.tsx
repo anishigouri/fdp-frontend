@@ -1,79 +1,116 @@
-import React from 'react';
 import { useFormik } from 'formik';
-import { ContainerStyled, ButtonContainerStyled } from './styled';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import Button from '../../../../components/button';
+import ButtonSubmit from '../../../../components/buttonSubmit';
 import FormFields from '../../../../components/formFields';
 import InputText from '../../../../components/inputText';
-import { initialValues, validationSchema } from '../model';
-import ButtonSubmit from '../../../../components/buttonSubmit';
+import { fetchPilotById, savePilot } from '../../../../redux/ducks/pilot';
+import { RootState } from '../../../../redux/store/store';
+import { initialValues, IPilot, validationSchema } from '../model';
+import { ButtonContainerStyled, ContainerStyled } from './styled';
+
+type Props = {
+  id: string;
+};
 
 const Pilot: React.FC = () => {
-  const formik = useFormik({
+  const history = useHistory();
+  const route = useRouteMatch<Props>();
+  const dispatch = useDispatch();
+
+  const pilot = useSelector<RootState, IPilot | undefined>(state => {
+    return state.pilotReducer.pilot;
+  });
+
+  useEffect(() => {
+    const { id } = route.params;
+    if (id && id !== '0') {
+      dispatch(fetchPilotById(id));
+    }
+  }, [route.params, dispatch]);
+
+  const { setValues, handleSubmit, errors, values, handleChange } = useFormik({
     initialValues,
     validationSchema,
     validateOnChange: false,
-    onSubmit: values => {
-      console.log(values);
+    onSubmit: pilotValue => {
+      dispatch(savePilot(pilotValue));
     },
   });
+
+  useEffect(() => {
+    if (pilot?.id) {
+      setValues(pilot);
+    }
+  }, [pilot, setValues]);
 
   return (
     <FormFields title="Cadastro de pilotos">
       <ContainerStyled>
-        <form onSubmit={formik.handleSubmit} className="row">
+        <form onSubmit={handleSubmit} className="row">
           <div className="col-12 col-sm-8">
             <InputText
               label="Nome"
-              onChange={formik.handleChange}
-              textError={formik.errors.name}
-              hasError={!!formik.errors.name}
+              onChange={handleChange}
+              textError={errors.name}
+              hasError={!!errors.name}
               name="name"
-              value={formik.values.name}
+              value={values.name}
             />
           </div>
           <div className="col-12 col-sm-4">
             <InputText
               label="Apelido"
-              onChange={formik.handleChange}
-              textError={formik.errors.nickname}
-              hasError={!!formik.errors.nickname}
+              onChange={handleChange}
+              textError={errors.nickname}
+              hasError={!!errors.nickname}
               name="nickname"
-              value={formik.values.nickname}
+              value={values.nickname}
             />
           </div>
           <div className="col-12 col-sm-6">
             <InputText
               label="E-mail"
-              onChange={formik.handleChange}
-              textError={formik.errors.email}
-              hasError={!!formik.errors.email}
+              onChange={handleChange}
+              textError={errors.email}
+              hasError={!!errors.email}
               name="email"
-              value={formik.values.email}
+              value={values.email}
             />
           </div>
           <div className="col-12 col-sm-3">
             <InputText
               label="Celular"
-              onChange={formik.handleChange}
-              textError={formik.errors.celphone}
-              hasError={!!formik.errors.celphone}
+              onChange={handleChange}
+              textError={errors.celphone}
+              hasError={!!errors.celphone}
               name="celphone"
               mask="(99)99999-9999"
-              value={formik.values.celphone}
+              value={values.celphone}
             />
           </div>
           <div className="col-12 col-sm-3">
             <InputText
               label="Nascimento"
-              onChange={formik.handleChange}
-              textError={formik.errors.birthdate}
-              hasError={!!formik.errors.birthdate}
+              onChange={handleChange}
+              textError={errors.birthdate}
+              hasError={!!errors.birthdate}
               name="birthdate"
               mask="99/99/9999"
-              value={formik.values.birthdate}
+              value={values.birthdate}
             />
           </div>
           <hr />
           <ButtonContainerStyled>
+            <Button
+              className="mr-2"
+              type="default"
+              text="Voltar"
+              onClick={() => history.push('/admin/pilots')}
+            />
+
             <ButtonSubmit type="primary" text="Salvar" />
           </ButtonContainerStyled>
         </form>

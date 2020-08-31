@@ -12,17 +12,21 @@ type types =
 interface IProps {
   type?: types;
   text: string;
+  className?: string;
   onClick(): void;
 }
 
-const Button: React.FC<IProps> = ({ type, text, onClick }) => {
+const Button: React.FC<IProps> = ({ type, text, onClick, className }) => {
   function onClickButton(e: FormEvent): void {
     e.preventDefault();
     onClick();
   }
 
   return (
-    <ContainerStyled className={type} onClick={e => onClickButton(e)}>
+    <ContainerStyled
+      className={`${type} ${className}`}
+      onClick={e => onClickButton(e)}
+    >
       {text}
     </ContainerStyled>
   );
@@ -31,6 +35,7 @@ const Button: React.FC<IProps> = ({ type, text, onClick }) => {
 Button.propTypes = {
   text: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  className: PropTypes.string,
   type: PropTypes.oneOf([
     'default',
     'primary',
@@ -43,6 +48,7 @@ Button.propTypes = {
 
 Button.defaultProps = {
   type: 'default',
+  className: '',
 };
 
 export default Button;

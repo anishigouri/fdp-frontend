@@ -1,10 +1,11 @@
 import * as Yup from 'yup';
 
 export interface IPilot {
+  id?: string;
   name: string;
-  nickname?: string;
-  photo?: string;
-  photoHelmet?: string;
+  nickname?: string | null;
+  photo?: string | null;
+  photoHelmet?: string | null;
   email: string;
   celphone: string;
   active: boolean;
