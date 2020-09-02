@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { IconButton } from '@material-ui/core';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import FormFields from '../../../../components/formFields';
 import { fetchPilots } from '../../../../redux/ducks/pilot';
 import { RootState } from '../../../../redux/store/store';
@@ -19,6 +21,10 @@ const PilotList: React.FC = () => {
     dispatch(fetchPilots());
   }, [dispatch]);
 
+  const onDelete = (id: string | undefined): void => {
+    console.log(id);
+  };
+
   return (
     <FormFields title="Lista de pilotos">
       <table className="table table-striped">
@@ -28,6 +34,7 @@ const PilotList: React.FC = () => {
             <td>E-mail</td>
             <td>Celular</td>
             <td>Editar</td>
+            <td>Excluir</td>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +45,21 @@ const PilotList: React.FC = () => {
                 <td>{pilot.email}</td>
                 <td>{pilot.celphone}</td>
                 <td>
-                  <Link to={`/admin/pilots/${pilot.id}`}>Editar</Link>
+                  <Link to={`/admin/pilots/${pilot.id}`}>
+                    <IconButton>
+                      <MdEdit />
+                    </IconButton>
+                  </Link>
+                </td>
+                <td>
+                  <IconButton
+                    color="inherit"
+                    aria-label="open drawer"
+                    onClick={() => onDelete(pilot.id)}
+                    edge="start"
+                  >
+                    <MdDelete />
+                  </IconButton>
                 </td>
               </tr>
             ))}

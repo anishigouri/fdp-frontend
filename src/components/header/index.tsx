@@ -13,6 +13,7 @@ import {
 import { MdMenu, MdChevronLeft } from 'react-icons/md';
 import { FiLogOut } from 'react-icons/fi';
 import { GiFullMotorcycleHelmet } from 'react-icons/gi';
+import { TiUser } from 'react-icons/ti';
 import { GoLightBulb } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +27,11 @@ const Header: React.FC = () => {
 
   const [open, setOpen] = useState(false);
   const listMenu = [
+    {
+      text: 'Meus Dados',
+      icon: <TiUser />,
+      route: '/admin/my-data',
+    },
     {
       text: 'Pilotos',
       icon: <GiFullMotorcycleHelmet />,
