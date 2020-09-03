@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import { useSelector, useDispatch } from 'react-redux';
 import { getUser } from '../../../utils/util';
@@ -9,11 +9,14 @@ import { initialValues, IMyData, validationSchema } from './model';
 import ButtonSubmit from '../../../components/buttonSubmit';
 import { RootState } from '../../../redux/store/store';
 import { fetchPilotById } from '../../../redux/ducks/pilot';
+import InputImageCrop from '../../../components/inputImageCrop';
+import Button from '../../../components/button';
 
 // import { Container } from './styles';
 
 const MyData: React.FC = () => {
   const dispatch = useDispatch();
+  const [open, setOpen] = useState<boolean>(false);
 
   const pilot = useSelector<RootState, IMyData | undefined>(state => {
     return state.pilotReducer.pilot;
@@ -46,6 +49,11 @@ const MyData: React.FC = () => {
     <FormFields title="Meus Dados">
       <ContainerStyled>
         <form onSubmit={handleSubmit} className="row">
+          <div className="col-12 h-100">
+            <Button onClick={() => setOpen(true)} text="Imagem" />
+            <InputImageCrop open={open} onClose={() => setOpen(false)} />
+          </div>
+
           <div className="col-12 col-sm-8">
             <InputText
               label="Nome"
