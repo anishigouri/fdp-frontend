@@ -48,14 +48,12 @@ const InputImageCrop: React.FC<IProps> = ({ image, open, onClose }) => {
       TransitionComponent={Transition}
       keepMounted
       onClose={handleClose}
-      aria-labelledby="alert-dialog-slide-title"
-      aria-describedby="alert-dialog-slide-description"
     >
       <DialogContent>
         <ContainerStyled>
           <ImageStyled>
             <Cropper
-              image="https://img.huffingtonpost.com/asset/5ab4d4ac2000007d06eb2c56.jpeg?cache=sih0jwle4e&ops=1910_1000"
+              image={image}
               crop={crop}
               zoom={zoom}
               aspect={4 / 3}
@@ -64,17 +62,16 @@ const InputImageCrop: React.FC<IProps> = ({ image, open, onClose }) => {
               onZoomChange={setZoom}
             />
           </ImageStyled>
-          <ControlsStyled>
-            <Slider
-              value={zoom}
-              min={1}
-              max={3}
-              step={0.1}
-              aria-labelledby="Zoom"
-              onChange={handleChange}
-            />
-          </ControlsStyled>
         </ContainerStyled>
+        <ControlsStyled>
+          <Slider
+            value={zoom}
+            min={1}
+            max={3}
+            step={0.1}
+            onChange={handleChange}
+          />
+        </ControlsStyled>
       </DialogContent>
       <DialogActions />
     </Dialog>
